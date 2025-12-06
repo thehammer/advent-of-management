@@ -1,0 +1,85 @@
+{
+  "day": 1,
+  "year": 2025,
+  "title": "The Credential Crisis",
+  "aoc_theme": "Circular dial with L/R rotations, counting zero-crossings",
+
+  "setup_narrative": "You arrive Monday morning to discover your team cannot access the production environment. The previous DevOps lead, Marcus, changed all credentials before departing on what he called an 'indefinite sabbatical to find himself.' A sticky note on his former monitor reads: 'The password is written somewhere safe. Good luck.'\n\nYour team's morale sits at a precarious 50 out of 100. Every decision you make will shift it toward burnout (0) or open revolt (100). Legend has it there exists a 'Zone of Resigned Compliance' where the team will simply do what you ask - but finding it requires careful calibration.\n\nThe board wants access restored by EOD. Several concerned parties have opinions about how to proceed.",
+
+  "initial_state": {
+    "morale": 50,
+    "budget": 100,
+    "access_restored": false,
+    "hr_incidents": 0,
+    "meetings_held": 0
+  },
+
+  "npcs": [
+    {
+      "name": "Jenkins",
+      "role": "Intern (6th month)",
+      "quirk": "Has been here longer than most engineers. Speaks only when directly addressed. Knows where everything is.",
+      "secret": "Marcus gave him the password 'just in case' but told him not to volunteer it."
+    },
+    {
+      "name": "Patricia",
+      "role": "HR Business Partner",
+      "quirk": "Every action requires Form 27B-stroke-6. Has forms for the forms.",
+      "secret": "Actually sympathetic but bound by 'the process.'"
+    },
+    {
+      "name": "The Slack Channel #prod-access",
+      "role": "Collective unconscious",
+      "quirk": "Responds only in emoji and GIFs. Somehow contains useful information if interpreted correctly.",
+      "secret": "Someone posted the password months ago but it was buried under 50 emoji reactions."
+    },
+    {
+      "name": "Bradley",
+      "role": "VP of Engineering",
+      "quirk": "Communicates exclusively in sports metaphors. Has never written code.",
+      "secret": "Approved Marcus's sabbatical without a transition plan. Terrified this will come out."
+    }
+  ],
+
+  "solution_steps": [
+    {
+      "step": 1,
+      "description": "Acknowledge the problem without blaming",
+      "action_patterns": ["acknowledge", "team meeting", "assess situation", "understand", "gather.*team", "let's.*figure", "what.*happened"],
+      "narrative_result": "Your team appreciates not being blamed for Marcus's departure. Jenkins makes brief eye contact with you - unusual for him.",
+      "state_changes": {"morale": 5},
+      "unlocks": "Jenkins will now respond to direct questions"
+    },
+    {
+      "step": 2,
+      "description": "Ask Jenkins directly",
+      "action_patterns": ["ask jenkins", "jenkins.*password", "intern.*know", "talk to jenkins", "jenkins.*help", "hey jenkins"],
+      "narrative_result": "Jenkins looks around nervously, then slides a sticky note across the table. 'Marcus said only give this to someone who asked nicely.' The password is 'IQuit123!'. Access is restored.",
+      "state_changes": {"access_restored": true, "morale": 10},
+      "victory": true
+    }
+  ],
+
+  "optimal_turn_count": 2,
+
+  "consequences": {
+    "fire|terminate": "You attempt to fire Marcus retroactively, which HR informs you is 'not a thing.' Patricia sighs and produces Form 89-C: Retroactive Termination Denial. You've wasted a turn and everyone saw you try.",
+    "hire consultant": "A consultant from McKinsey arrives within the hour (suspicious speed). They recommend a 6-month 'Credential Governance Transformation Initiative' for $400,000. Your budget decreases by 50 just for the proposal.",
+    "email marcus|contact marcus": "Auto-reply: 'I am currently on a journey of self-discovery in Bali. I will return when the universe tells me it's time. Namaste.' The email includes a 4-paragraph reflection on impermanence.",
+    "reset|wipe|reinstall": "IT Security is automatically notified. A compliance audit is triggered. All systems are frozen for 72 hours pending review. Bradley sends you a Slack message: 'Not a great look, champ.'",
+    "blame|whose fault": "The team's morale drops as finger-pointing begins. Jenkins retreats further into his hoodie. You've made things harder.",
+    "meeting|standup|sync": "You schedule a meeting. Nothing is resolved but everyone feels like progress was made. Meetings held +1, actual progress 0.",
+    "check slack|search slack": "You find 10,000 unread messages in #prod-access. Buried somewhere in 2023 is potentially useful information, but finding it would take hours. The channel responds to your query with: 🤷 👀 🔥 📉",
+    "call security|security": "Security arrives and stands around looking concerned. They cannot help with passwords but offer to escort Marcus off the premises. You explain he's already gone. Awkward silence ensues.",
+    "password reset|reset password": "The password reset system requires... the production credentials you don't have. It's passwords all the way down.",
+    "ask bradley|talk to bradley": "Bradley claps you on the shoulder. 'We really need to knock this one out of the park, champ. Hit a home run. Slam dunk this thing.' He walks away without providing any actionable information."
+  },
+
+  "hints": [
+    "Sometimes the most junior person in the room has the most institutional knowledge.",
+    "Marcus may have left a backup plan with someone he trusted.",
+    "Have you tried just... asking the people who were here?"
+  ],
+
+  "victory_message": "Congratulations. Through the radical act of asking a direct question to the person who obviously knew, you've restored production access.\n\nBradley sends a company-wide email taking credit for 'fostering a culture of open communication.' Jenkins returns to being invisible. Patricia files your victory under Form 12-W: Incident Resolution (Accidental).\n\nThe board is satisfied. For now."
+}
