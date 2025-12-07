@@ -21,7 +21,7 @@ These URLs are pre-authorized for fetching:
 - https://advent-of-management.s3.us-east-1.amazonaws.com/2025/tone_guide.md
 - https://advent-of-management.s3.us-east-1.amazonaws.com/2025/cast.md
 
-### Daily Scenarios
+### Daily Scenarios (2025 has 12 days)
 - https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day1.json
 - https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day2.json
 - https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day3.json
@@ -34,19 +34,6 @@ These URLs are pre-authorized for fetching:
 - https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day10.json
 - https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day11.json
 - https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day12.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day13.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day14.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day15.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day16.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day17.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day18.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day19.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day20.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day21.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day22.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day23.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day24.json
-- https://advent-of-management.s3.us-east-1.amazonaws.com/2025/day25.json
 
 ## Fallback Rules (if S3 unavailable)
 

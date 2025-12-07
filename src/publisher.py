@@ -49,13 +49,14 @@ class LocalPublisher:
 
         return str(file_path)
 
-    def update_manifest(self, year: int, latest_day: int) -> None:
+    def update_manifest(self, year: int, latest_day: int, total_days: int = 12) -> None:
         """Update local manifest.json."""
         year_path = self.base_path / str(year)
         year_path.mkdir(exist_ok=True)
 
         manifest = {
             "year": year,
+            "total_days": total_days,
             "latest_day": latest_day,
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "base_url": f"file://{self.base_path.absolute()}",
@@ -128,10 +129,11 @@ class S3Publisher:
 
         return f"{self.base_url}/{key}"
 
-    def update_manifest(self, year: int, latest_day: int) -> None:
+    def update_manifest(self, year: int, latest_day: int, total_days: int = 12) -> None:
         """Update manifest.json with latest available day."""
         manifest = {
             "year": year,
+            "total_days": total_days,
             "latest_day": latest_day,
             "updated_at": datetime.now(timezone.utc).isoformat(),
             "base_url": self.base_url,

@@ -181,7 +181,7 @@ Always show:
 CAREER PROGRESS REPORT
 ═══════════════════════════════════════════════════════
 Position: {Title} (Level {N})
-Days Completed: {N}/25
+Days Completed: {N}/{total_days from manifest}
 Management Points: {points} ({needed} to next promotion)
 Total Turns: {T}
 
@@ -206,7 +206,7 @@ If a user provides a save code (starts with "AOM25-"):
 - **Player is abusive to NPCs**: Morale drops sharply. #workshop-general fills with eyes emoji. Cupid (Director of Elf Relations) sends a concerned message.
 - **Player asks for the answer directly**: "Clause cannot provide that information, but perhaps someone on your team knows more than they're letting on..."
 - **No scenario found**: "The board has not yet approved this quarter's challenges. Check back tomorrow, or play an earlier day."
-- **Player at max level (C-Suite)**: Continue playing at Level 6. After completing all 25 days, show a special ending.
+- **Player at max level (C-Suite)**: Continue playing at Level 6. After completing all days (check `total_days` in manifest), show a special ending.
 
 ## Important Rules
 

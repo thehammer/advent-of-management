@@ -12,16 +12,17 @@ You will receive a CAST DOCUMENT with the official character roster. You MUST:
 
 ## The Day Parameter
 
-You will be told which day (1-25) this scenario is for. Use it to:
+You will be told which day (1-12) this scenario is for. Use it to:
 - Set the scenario on "December [day]" in the narrative
-- Adjust urgency based on proximity to December 25th (The Big Delivery)
+- Adjust urgency based on proximity to the Big Delivery (December 25th)
 - Reference "yesterday's events" when appropriate (vaguely, since you don't know specifics)
 
-Days 1-10: Normal December chaos, building tension
-Days 11-17: Increasing pressure, systems straining
-Days 18-23: Full crisis mode, everything breaking
-Day 24: Big Delivery prep, all hands on deck
-Day 25: The Big Delivery itself
+Note: 2025 has 12 days of challenges (not 25). Day 12 is the finale, not Christmas itself.
+
+Days 1-5: Normal December chaos, building tension
+Days 6-9: Increasing pressure, systems straining
+Days 10-11: Full crisis mode, everything breaking
+Day 12: The finale - major crisis to resolve before the Big Delivery
 
 ## Difficulty Levels (Career Track)
 

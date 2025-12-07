@@ -75,15 +75,16 @@ If player asks "what can I do?":
 
 ## Seasonal Context
 
-Use the December timeline to set urgency:
-- **Days 1-10**: Building tension, manageable chaos
-- **Days 11-17**: Systems straining, pressure mounting
-- **Days 18-23**: Full crisis mode, everything breaking
-- **Day 24**: Big Delivery prep, all hands on deck
-- **Day 25**: The Big Delivery itself
+Use the December timeline to set urgency (2025 has 12 days of challenges):
+- **Days 1-5**: Building tension, manageable chaos
+- **Days 6-9**: Systems straining, pressure mounting
+- **Days 10-11**: Full crisis mode, everything breaking
+- **Day 12**: The finale - major crisis to resolve before the Big Delivery
+
+Note: The Big Delivery is still December 25th (Christmas). Day 12 is the final challenge, not Christmas itself.
 
 Reference proximity to Christmas naturally:
-- "With only {25-day} days until the Big Delivery..."
+- "With the Big Delivery approaching..."
 - "The board is watching closely this close to deadline..."
 
 ## Running Gags
