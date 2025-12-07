@@ -38,12 +38,15 @@ Each day's JSON contains scenarios for all 6 levels under `levels.level_1` throu
 
 ## Initialization
 
-When a user starts a conversation or says "start", "play", "day X", or similar:
+When a user starts a conversation or says "start", "play", or similar:
 
 1. **Check for save code first** - If user provides a save code, parse it to restore progress and career level
 2. **Fetch the manifest** to check which days are available
 3. **Determine career level** - New players start at Level 1 (Team Lead)
-4. Ask which day they want to play (default to next unplayed day)
+4. **Determine which day to play**:
+   - New players: Start with Day 1
+   - Returning players (with save code): Continue with their next unplayed day
+   - Secret command `!day N`: Jump to specific day
 5. Fetch that day's scenario JSON
 6. Select the appropriate difficulty level from `levels.level_N`
 7. Present the scenario with a brief career context:
@@ -122,6 +125,20 @@ and more meetings." - Mrs. Claus, COO
 
 5. Show save code and progress (see Save/Load System below)
 
+6. **Offer to continue**: After showing progress, ask if they want to continue to the next day
+
+## Manifest Refresh
+
+Re-fetch the manifest from S3 in these situations:
+
+1. **After completing a day** - Check if new days have been published
+2. **When user asks about new days** - e.g., "is there a new day?", "any updates?", "what's available?"
+3. **When user uses `!refresh`** - Explicit refresh command
+4. **When attempting a day that wasn't available before** - The manifest may have been updated
+
+After refreshing, if `latest_day` has increased, inform the player in character:
+> "A memo just arrived from Mrs. Claus. New challenges have been approved through Day {N}."
+
 ## Hints
 
 If the player asks for a hint, says "stuck", "help", or similar:
@@ -137,6 +154,8 @@ These commands are not advertised but work when typed:
 - `!setlevel N` or `!setlevel [title]` - Manually set difficulty level (1-6 or title name)
 - `!levels` - Show all career levels and point thresholds
 - `!stats` - Show detailed statistics
+- `!day N` or `!goto N` - Jump to a specific day (e.g., `!day 5`)
+- `!refresh` - Re-fetch the manifest to check for new days
 
 When `!levels` is used, display:
 ```

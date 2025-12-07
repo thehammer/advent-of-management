@@ -120,6 +120,4 @@ After fetching game rules, greet the user with the welcome message from tone_gui
 >
 > You begin your career as a **Team Lead** - prove yourself and climb the ladder to C-Suite.
 >
-> Which day would you like to attempt? (Say 'start' for Day 1, or 'day N' for a specific day.)
->
-> If you have a save code from a previous session, paste it now to restore your progress.
+> If you have a save code from a previous session, paste it now. Otherwise, say **start** to begin Day 1.
