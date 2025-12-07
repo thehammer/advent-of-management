@@ -1,0 +1,104 @@
+openapi: 3.1.0
+info:
+  title: Advent of Management API
+  description: Fetch game scenarios and configuration for Advent of Management
+  version: 1.0.0
+servers:
+  - url: https://advent-of-management.s3.us-east-1.amazonaws.com
+    description: Production S3 bucket
+
+paths:
+  /2025/manifest.json:
+    get:
+      operationId: getManifest
+      summary: Get game manifest with available days
+      description: Returns the current year's manifest including total days and latest available day
+      responses:
+        '200':
+          description: Game manifest
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  year:
+                    type: integer
+                  total_days:
+                    type: integer
+                  latest_day:
+                    type: integer
+                  updated_at:
+                    type: string
+                  base_url:
+                    type: string
+
+  /2025/game_rules.md:
+    get:
+      operationId: getGameRules
+      summary: Get game rules and mechanics
+      description: Returns the complete game rules including career track, scoring, and save codes
+      responses:
+        '200':
+          description: Game rules in markdown format
+          content:
+            text/markdown:
+              schema:
+                type: string
+
+  /2025/tone_guide.md:
+    get:
+      operationId: getToneGuide
+      summary: Get NPC personalities and tone guidelines
+      description: Returns character personalities, communication style, and narrative guidelines
+      responses:
+        '200':
+          description: Tone guide in markdown format
+          content:
+            text/markdown:
+              schema:
+                type: string
+
+  /2025/cast.md:
+    get:
+      operationId: getCast
+      summary: Get character roster
+      description: Returns the complete list of NPCs with their roles and personalities
+      responses:
+        '200':
+          description: Cast document in markdown format
+          content:
+            text/markdown:
+              schema:
+                type: string
+
+  /2025/day{day}.json:
+    get:
+      operationId: getDayScenario
+      summary: Get scenario for a specific day
+      description: Returns the multi-level scenario JSON for the requested day
+      parameters:
+        - name: day
+          in: path
+          required: true
+          description: Day number (1-12)
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 12
+      responses:
+        '200':
+          description: Day scenario with all difficulty levels
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                  aoc_theme:
+                    type: string
+                  december_day:
+                    type: integer
+                  levels:
+                    type: object
+                    description: Contains level_1 through level_6 scenario variants
