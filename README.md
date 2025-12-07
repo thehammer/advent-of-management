@@ -27,14 +27,14 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env with your credentials
 
-# Generate scenarios (without solving puzzles)
-python -m src.main --generate-only
+# Generate scenarios locally
+python -m src.main
 
 # Generate and publish to S3
-python -m src.main --s3 --generate-only
+python -m src.main --s3
 
 # Generate for specific day
-python -m src.main --day 1 --s3 --generate-only
+python -m src.main --day 1 --s3
 ```
 
 ## Configuration
@@ -73,19 +73,27 @@ launchctl load ~/Library/LaunchAgents/com.hammer.advent-of-management.plist
 launchctl list | grep advent
 ```
 
+## Solving Puzzles
+
+To solve the actual AoC puzzles (separate from scenario generation), use Claude Code:
+
+```bash
+claude "Read prompts/solver_prompt.md then solve day 1"
+```
+
+Solutions are saved to `solutions/` (gitignored).
+
 ## Project Structure
 
 ```
 advent-of-management/
 ├── src/
 │   ├── aoc_client.py      # AoC puzzle fetching
-│   ├── solver.py          # Claude API puzzle solving (optional)
 │   ├── scenario_gen.py    # Management scenario generation
 │   ├── publisher.py       # S3/local publishing
-│   ├── main.py            # Main orchestration
-│   └── solve_aoc.py       # Standalone puzzle solver with artifacts
+│   └── main.py            # Main orchestration
 ├── prompts/
-│   ├── solver_prompt.md   # System prompt for solving AoC
+│   ├── solver_prompt.md   # Guide for solving AoC with Claude Code
 │   ├── scenario_prompt.md # System prompt for generating scenarios
 │   └── clause_prompt.md   # The playable game prompt (use this!)
 ├── scenarios/             # Local scenario JSON files

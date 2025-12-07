@@ -1,19 +1,17 @@
 """
-Main entry point - orchestrates AoC solving and scenario generation
+Main entry point - orchestrates scenario generation from AoC puzzles
 """
 
 import logging
 import os
 import sys
 import time
-from datetime import datetime
 from pathlib import Path
 
 import schedule
 from dotenv import load_dotenv
 
 from .aoc_client import AoCClient
-from .solver import AoCSolver
 from .scenario_gen import ScenarioGenerator
 from .publisher import LocalPublisher, S3Publisher
 
@@ -30,19 +28,17 @@ logger = logging.getLogger(__name__)
 
 
 class AdventOfManagementServer:
-    def __init__(self, use_s3: bool = False, generate_only: bool = False):
+    def __init__(self, use_s3: bool = False):
         load_dotenv()
 
         # Validate required environment variables
         self._validate_env()
 
         self.year = int(os.getenv("AOC_YEAR", "2025"))
-        self.generate_only = generate_only
         self.aoc = AoCClient(
             os.environ["AOC_SESSION_COOKIE"],
             year=self.year,
         )
-        self.solver = None if generate_only else AoCSolver(os.environ["ANTHROPIC_API_KEY"])
         self.generator = ScenarioGenerator(os.environ["ANTHROPIC_API_KEY"])
 
         if use_s3:
@@ -74,7 +70,7 @@ class AdventOfManagementServer:
 
     def process_day(self, day: int, force: bool = False) -> bool:
         """
-        Process a single day: optionally solve puzzle and generate scenario.
+        Process a single day: fetch puzzle and generate scenario.
         Returns True if successful.
         """
         if day in self.processed_days and not force:
@@ -87,49 +83,6 @@ class AdventOfManagementServer:
             # Fetch puzzle
             puzzle = self.aoc.get_puzzle(day)
             logger.info(f"  Fetched: {puzzle.title}")
-
-            # Solve puzzle (unless generate_only mode)
-            if not self.generate_only and self.solver:
-                # Solve Part 1
-                logger.info("  Solving Part 1...")
-                answer1, response1 = self.solver.solve(puzzle, part=1)
-
-                if not answer1:
-                    logger.error(f"  Could not extract Part 1 answer")
-                    return False
-
-                logger.info(f"  Part 1 answer: {answer1}")
-
-                # Submit Part 1
-                success, message = self.aoc.submit_answer(day, 1, answer1)
-                if not success:
-                    if "already solved" in message.lower() or "wrong part" in message.lower():
-                        logger.info(f"  Part 1 already solved")
-                    else:
-                        logger.warning(f"  Part 1 submission: {message}")
-                        # Try to continue anyway - maybe we can still generate scenario
-                else:
-                    logger.info(f"  Part 1 correct!")
-
-                # Refresh puzzle to get Part 2
-                time.sleep(2)  # Be nice to AoC
-                puzzle = self.aoc.get_puzzle(day)
-
-                if puzzle.part2_unlocked:
-                    logger.info("  Solving Part 2...")
-                    answer2, response2 = self.solver.solve(puzzle, part=2)
-
-                    if answer2:
-                        logger.info(f"  Part 2 answer: {answer2}")
-                        success, message = self.aoc.submit_answer(day, 2, answer2)
-                        if success:
-                            logger.info(f"  Part 2 correct!")
-                        else:
-                            logger.warning(f"  Part 2 submission: {message}")
-                    else:
-                        logger.warning("  Could not extract Part 2 answer")
-            else:
-                logger.info("  Skipping solve (generate-only mode)")
 
             # Generate management scenario
             logger.info("  Generating management scenario...")
@@ -219,15 +172,10 @@ def main():
         action="store_true",
         help="Force reprocessing even if already done",
     )
-    parser.add_argument(
-        "--generate-only",
-        action="store_true",
-        help="Only generate scenarios, skip puzzle solving",
-    )
 
     args = parser.parse_args()
 
-    server = AdventOfManagementServer(use_s3=args.s3, generate_only=args.generate_only)
+    server = AdventOfManagementServer(use_s3=args.s3)
 
     if args.scheduler:
         server.run_scheduler()
