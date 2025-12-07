@@ -10,13 +10,16 @@ from typing import Protocol
 import boto3
 from botocore.exceptions import ClientError
 
-from .scenario_gen import ManagementScenario
+from .scenario_gen import ManagementScenario, MultiLevelScenario
+
+# Union type for both scenario formats
+Scenario = ManagementScenario | MultiLevelScenario
 
 
 class Publisher(Protocol):
     """Protocol for scenario publishers."""
 
-    def publish_scenario(self, scenario: ManagementScenario) -> str:
+    def publish_scenario(self, scenario: Scenario) -> str:
         """Publish scenario and return its URL/path."""
         ...
 
@@ -36,7 +39,7 @@ class LocalPublisher:
         self.base_path = Path(base_path)
         self.base_path.mkdir(parents=True, exist_ok=True)
 
-    def publish_scenario(self, scenario: ManagementScenario) -> str:
+    def publish_scenario(self, scenario: Scenario) -> str:
         """Save scenario to local JSON file."""
         year_path = self.base_path / str(scenario.year)
         year_path.mkdir(exist_ok=True)
@@ -111,7 +114,7 @@ class S3Publisher:
 
         self.base_url = f"https://{bucket_name}.s3.{region}.amazonaws.com"
 
-    def publish_scenario(self, scenario: ManagementScenario) -> str:
+    def publish_scenario(self, scenario: Scenario) -> str:
         """Upload scenario JSON to S3."""
         key = f"{scenario.year}/day{scenario.day}.json"
 
