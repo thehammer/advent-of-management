@@ -1,0 +1,20 @@
+[project]
+name = "advent-of-management"
+version = "0.1.0"
+description = "A parody of Advent of Code where programming puzzles become corporate dysfunction scenarios"
+requires-python = ">=3.12"
+license = "MIT"
+dependencies = [
+    "anthropic>=0.39.0",
+    "boto3>=1.35.0",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.0",
+    "python-dotenv>=1.0.0",
+    "schedule>=1.2.0",
+]
+
+[project.scripts]
+aom = "src.main:main"
+
+[dependency-groups]
+dev = []

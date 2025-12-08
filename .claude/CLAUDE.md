@@ -59,14 +59,25 @@ advent-of-management.s3.us-east-1.amazonaws.com/
     └── ...
 ```
 
+## Setup
+
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management.
+
+```bash
+# Install dependencies
+uv sync
+
+# Run commands
+uv run python -m src.main --day 8
+```
+
 ## Common Operations
 
 ### Generate and Publish a New Day
 
-```python
+```bash
 cd "/Users/hammer/Software Development/Open Source/advent-of-management"
-source venv/bin/activate
-python -m src.main --day 8  # Generate day 8
+uv run python -m src.main --day 8  # Generate day 8
 ```
 
 Or manually:
