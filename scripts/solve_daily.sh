@@ -32,9 +32,29 @@ if [ -f "$SOLUTION_DIR/solution.py" ]; then
     exit 0
 fi
 
+# Use Opus for better reasoning on complex AoC problems
+# Sonnet is faster but makes more algorithmic mistakes
+MODEL="opus"
+
 # Run Claude Code to solve the puzzle
 # Using --print to avoid interactive mode, -p for prompt
-claude -p "Read prompts/solver_prompt.md then solve day $DAY. Submit both parts using the AoCClient.submit_answer() method. Be concise." \
+# Key instructions:
+# 1. Read the solver guide with performance planning advice
+# 2. Analyze input size BEFORE coding
+# 3. Use 30s timeout to detect slow solutions
+# 4. Submit answers via AoCClient
+claude -p "Read prompts/solver_prompt.md carefully, especially the CRITICAL: Performance Planning section.
+
+Solve AoC $YEAR Day $DAY following this process:
+1. Fetch puzzle and save input
+2. BEFORE CODING: Analyze input size and coordinate ranges
+3. Plan algorithm complexity based on input size
+4. Write solution with example tests
+5. Run with 30s timeout - if it times out, the algorithm is wrong, optimize
+6. Submit both parts using AoCClient.submit_answer()
+
+Be concise. If a solution times out, analyze why and rewrite with better complexity." \
+    --model "$MODEL" \
     --allowedTools "Bash(*)" "Read(*)" "Write(*)" "Edit(*)" "Glob(*)" "Grep(*)" "WebFetch(*)" \
     2>&1 | tee -a "$LOG_FILE"
 
