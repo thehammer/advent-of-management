@@ -4,7 +4,15 @@ A parody of Advent of Code where programming puzzles become corporate dysfunctio
 
 ## Play Now
 
-Copy the contents of [`prompts/clause_prompt.md`](prompts/clause_prompt.md) into a Claude.ai conversation as a Project prompt, then say "start" to play!
+<p align="center">
+  <a href="https://tinyurl.com/advent-of-management">
+    <img src="assets/play_qr.png" alt="Scan to Play" width="200">
+  </a>
+</p>
+
+<p align="center">
+  <strong>Scan the QR code</strong> or <a href="https://tinyurl.com/advent-of-management">click here</a> to start playing in Claude!
+</p>
 
 Scenarios are hosted at: `https://advent-of-management.s3.us-east-1.amazonaws.com/2025/`
 
